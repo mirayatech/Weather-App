@@ -7,6 +7,7 @@ import {
 
 function App() {
   const [weather, setWeather] = useState(null);
+  const [input, setInput] = useState("");
   // const [input, setInput] = useState("");
 
   useEffect(() => {
@@ -21,12 +22,31 @@ function App() {
       });
   }, []);
 
+  // Event
+  const weatherInput = (e) => {
+    setInput(e.target.value);
+  };
+
+  const searchWeather = () => {
+    fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}&q=${input}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setWeather(data);
+      });
+  };
+
   return (
     <div className="App">
       {weather && (
         <div className="weather-info">
           <div className="header">
             <h1>Weather App</h1>
+          </div>
+          <div className="form">
+            <input onChange={weatherInput} type="text" />
+            <button onClick={searchWeather}>Search</button>
           </div>
           <img src={weather.current.condition.icon} alt="weather icon" />
           <h1>{weather.current.temp_c}°C</h1>
