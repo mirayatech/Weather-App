@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDroplet,
   faTemperatureThreeQuarters,
+  faMagnifyingGlass,
+  faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
@@ -38,39 +40,50 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="">
       {weather && (
-        <div className="weather-info">
-          <div className="header">
-            <h1>Weather App</h1>
+        <div className="container">
+          {/* form */}
+          <div className="intro">
+            <input
+              onChange={weatherInput}
+              type="text"
+              placeholder="Enter a city name"
+            />
+            <button onClick={searchWeather}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
           </div>
-          <div className="form">
-            <input onChange={weatherInput} type="text" />
-            <button onClick={searchWeather}>Search</button>
-          </div>
-          <img src={weather.current.condition.icon} alt="weather icon" />
-          <h1>{weather.current.temp_c}°C</h1>
-          <h3>{weather.current.condition.text}</h3>
-          <h1>
-            {weather.location.name}, {weather.location.country}
-          </h1>
-          <div className="wrapper">
-            <div className="aside">
-              <FontAwesomeIcon
-                icon={faTemperatureThreeQuarters}
-                className="temprature-icon"
-              />
-              <div className="aside info">
-                <h3>{weather.current.temp_c}°C</h3>
-                <h3>Feels like</h3>
+          {/* Weather Info */}
+          <div className="weather-info">
+            <img src={weather.current.condition.icon} alt="weather icon" />
+            <h1>
+              {weather.current.temp_c}
+              <span>°C</span>{" "}
+            </h1>
+            <h3>{weather.current.condition.text}</h3>
+            <h3 className="location">
+              {/* <FontAwesomeIcon icon={faLocationDot} /> */}
+              {weather.location.name}, {weather.location.country}
+            </h3>
+            <div className="wrapper">
+              <div className="aside first">
+                <FontAwesomeIcon
+                  icon={faTemperatureThreeQuarters}
+                  className="icon"
+                />
+                <div className="aside-info">
+                  <h3>{weather.current.temp_c}°C</h3>
+                  <p>Feels like</p>
+                </div>
               </div>
-            </div>
 
-            <div className="aside">
-              <FontAwesomeIcon icon={faDroplet} className="humidity-icon" />
-              <div className="aside info">
-                <h3>{weather.current.humidity}%</h3>
-                <h3>Humidity</h3>
+              <div className="aside second">
+                <FontAwesomeIcon icon={faDroplet} className="icon" />
+                <div className="aside-info">
+                  <h3>{weather.current.humidity}%</h3>
+                  <p>Humidity</p>
+                </div>
               </div>
             </div>
           </div>
