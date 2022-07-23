@@ -127,3 +127,18 @@ span {
 .aside .aside-info p {
   font-size: calc(14 / 16 * 1rem);
 }
+
+/* MOBILE */
+@media screen and (max-width: 438px) {
+  .intro input {
+    max-width: 250px;
+  }
+
+  .wrapper .aside.first {
+    padding-right: 30px;
+  }
+  .wrapper .aside.second {
+    padding-left: 30px;
+    border-left: 1px solid #ccc;
+  }
+}
